@@ -26,6 +26,10 @@ This partial renders a WYSIWYG text area to help writing Markdown text
     $(function() {
       var el = document.getElementById('<%= field.html_id %>')
       var options = JSON.parse(el.getAttribute('data-easymde-options'));
+      if (options.imageUploadFunction) {
+        func = window[options.imageUploadFunction]
+        options.imageUploadFunction = func
+      }
 
       new EasyMDE(Object.assign({}, { element: el }, options));
     });
